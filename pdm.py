@@ -32,15 +32,12 @@ class PDM:
                    'detected_items': [{'start': item.start, 'end': item.end, 'entity_type': item.entity_type} for item in anonymized_results.items]}
         return results
 
+
 pdm_model = PDM()
+
 
 # Main
 if __name__ == '__main__':
     text = "My name is Rajasekar Venkatesan and my phone number is +6597720584. I live in Singapore but I am from Tamil Nadu, India. I'm an Indian and Hindu. My GPU machine's local address is 192.162.18.9 and my email address is rajasekar_venkatesan@singaporeair.com.sg. I'm working on a search project for www.singaporeair.com.sg for about 2 months 12 days and 6 hours as of 04:30 PM today. My credit card number is 4119-1101-0319-4913 and my FIN number is G1162041N"
     result = pdm_model.predict(text)
     pprint(result)
-
-
-# Import as Library
-if __name__ == 'host_streamlit':
-    pdm_model = PDM()

@@ -3,6 +3,7 @@ Streamlit frontend for PDM model
 """
 
 # Imports
+import pandas as pd
 import streamlit as st
 from pdm import pdm_model, ENTITIES_OF_INTEREST
 
@@ -17,4 +18,17 @@ text = "My name is Rajasekar Venkatesan and my phone number is +6597720584. I li
 entities_of_interest = st.multiselect("Select the entities to be detected: ", ENTITIES_OF_INTEREST, ['PERSON'])
 text = st.text_area("Enter text: ", text)
 result = pdm_model.predict(text, entities_of_interest)
-st.write(result)
+st.write(f'Time to Analyze text: {result["time_to_analyze"]}')
+st.write(f'Time to Anonymize text: {result["time_to_anonymize"]}')
+st.subtitle('Anonymized Text')
+st.write(result["anonymized_text"])
+st.subtitle('PII Entities')
+entities = result["detected_items"]
+starts, ends, entity_types, entity_texts = [], [], [], []
+for item in entities:
+    starts.append(item["start"])
+    ends.append(item["end"])
+    entity_types.append(item["entity_type"])
+    entity_texts.append(text[item["start"]:item["end"]])
+df = pd.DataFrame({'ENTITY_TEXT': entity_texts, 'ENTITY_TYPE': entity_types, 'START_POSITION': starts, 'END_POSITION': ends})
+st.write(df)
