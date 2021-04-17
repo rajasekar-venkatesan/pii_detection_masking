@@ -32,7 +32,7 @@ class PDM:
                    'detected_items': [{'start': item.start, 'end': item.end, 'entity_type': item.entity_type} for item in anonymized_results.items]}
         return results
 
- pdm_model = PDM()
+pdm_model = PDM()
 
 # Main
 if __name__ == '__main__':
