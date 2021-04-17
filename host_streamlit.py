@@ -20,9 +20,9 @@ text = st.text_area("Enter text: ", text)
 result = pdm_model.predict(text, entities_of_interest)
 st.write(f'Time to Analyze text: {result["time_to_analyze"]}')
 st.write(f'Time to Anonymize text: {result["time_to_anonymize"]}')
-st.subtitle('Anonymized Text')
+st.header('Anonymized Text')
 st.write(result["anonymized_text"])
-st.subtitle('PII Entities')
+st.subheader('PII Entities')
 entities = result["detected_items"]
 starts, ends, entity_types, entity_texts = [], [], [], []
 for item in entities:
